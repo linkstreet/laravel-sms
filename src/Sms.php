@@ -2,10 +2,11 @@
 
 namespace Linkstreet\LaravelSms;
 
+use Linkstreet\LaravelSms\Adapters\Kap\KapAdapter;
 use Linkstreet\LaravelSms\Collection\DeviceCollection;
+use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Model\Device;
 use Linkstreet\LaravelSms\Model\Message;
-use Linkstreet\LaravelSms\SmsManager;
 
 /**
 * Class SMS
@@ -64,6 +65,6 @@ class Sms
      */
     public function kapAdapter()
     {
-        return new \Linkstreet\LaravelSms\Adapters\Kap\KapAdapter();
+        return new KapAdapter();
     }
 }

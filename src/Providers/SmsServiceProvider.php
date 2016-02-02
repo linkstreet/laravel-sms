@@ -3,6 +3,7 @@
 namespace Linkstreet\LaravelSms\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Linkstreet\LaravelSms\Sms;
 
 class SmsServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,7 @@ class SmsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('sms', function () {
-            return new \Linkstreet\LaravelSms\Sms();
+            return new Sms();
         });
     }
 

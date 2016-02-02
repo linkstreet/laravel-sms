@@ -76,9 +76,9 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
     }
 
     /**
-     * Check & retrive the config for KAP adapter
-     *
+     * Check & retrieve the config for KAP adapter
      * @return array
+     * @throws AdapaterException
      */
     private function requiredConfig()
     {
