@@ -1,6 +1,6 @@
 <?php
 
-namespace Linkstreet\LaravelSms\Exception;
+namespace Linkstreet\LaravelSms\Exceptions;
 
 class AdapterException extends \Exception
 {
