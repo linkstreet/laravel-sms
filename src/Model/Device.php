@@ -79,7 +79,7 @@ class Device implements DeviceInterface
      * @param boolean $withPlus Whether want to add plus to the result
      * @return string
      */
-    public function mobileNumber($withPlus = false)
+    public function getFormattedNumber($withPlus = false)
     {
         return (($withPlus)? '+' : '').$this->code.$this->number;
     }
