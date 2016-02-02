@@ -1,0 +1,25 @@
+{
+    "name": "linkstreetlearning/laravel-sms",
+    "type": "library",
+    "description": "Package to support multi SMS gateway providers",
+    "license": "MIT",
+    "keywords": ["laravel", "sms"],
+    "homepage": "https://github.com/linkstreetlearning/laravel-sms",
+    "authors": [
+        {
+            "name": "Vignesh Gurusamy",
+            "email": "vignesh@linkstreet.in",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "^5.1",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Linkstreet\\LaravelSms\\": "src"
+        }
+    }
+}
