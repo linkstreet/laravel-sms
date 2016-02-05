@@ -14,12 +14,12 @@ use Linkstreet\LaravelSms\Model\Message;
 class Sms
 {
     /**
-     * Get SmsManager Class object
+     * Get SmsManager Class
      *
      * @param AdapterInterface $adapter
      * @return \Linkstreet\LaravelSms\SmsManager
      */
-    public function manager($adapter)
+    public function app($adapter)
     {
         return new SmsManager($adapter);
     }
@@ -27,7 +27,7 @@ class Sms
     /**
      * Create a new Message
      *
-     * @param  [type] $message [description]
+     * @param MessageInterface $message
      * @return \Linkstreet\LaravelSms\Model\Message
      */
     public function message($message)
@@ -38,19 +38,18 @@ class Sms
     /**
      * Create a new device
      *
-     * @param int $code International mobile code
      * @param int $number mobile number
      * @return \Linkstreet\LaravelSms\Model\Device
      */
-    public function device($code, $number)
+    public function device($number)
     {
-        return new Device($code, $number);
+        return new Device($number);
     }
 
     /**
      * Create a new device collection
      *
-     * @param  array  $devices [description]
+     * @param array $devices
      * @return \Linkstreet\LaravelSms\Collection\DeviceCollection
      */
     public function deviceCollection(array $devices)
