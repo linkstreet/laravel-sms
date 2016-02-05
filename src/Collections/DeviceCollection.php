@@ -30,7 +30,7 @@ class DeviceCollection implements \IteratorAggregate
      */
     public function add(DeviceInterface $device)
     {
-        $this->devices[$device->getFormattedNumber()] = $device;
+        $this->devices[$device->getNumber()] = $device;
     }
 
     /**

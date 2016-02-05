@@ -53,7 +53,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
         $recipients = [];
 
         foreach ($devices as $device) {
-            $recipients[]['gsm'] = $device->mobileNumber();
+            $recipients[]['gsm'] = $device->getNumber();
         }
 
         return [
