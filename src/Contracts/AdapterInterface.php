@@ -10,7 +10,7 @@ interface AdapterInterface
     /**
      * Send SMS
      *
-     * @param \Linkstreet\LaravelSms\Collection\DeviceCollection $devices
+     * @param \Linkstreet\LaravelSms\Collections\DeviceCollection $devices
      * @param \Linkstreet\LaravelSms\Contracts\MessageInterface $message
      * @param array
      */

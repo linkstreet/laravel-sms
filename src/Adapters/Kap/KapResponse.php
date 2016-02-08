@@ -2,7 +2,7 @@
 
 namespace Linkstreet\LaravelSms\Adapters\Kap;
 
-use Linkstreet\LaravelSms\Collection\DeviceCollection;
+use Linkstreet\LaravelSms\Collections\DeviceCollection;
 use Linkstreet\LaravelSms\Contracts\ResponseInterface;
 
 /**

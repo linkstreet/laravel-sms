@@ -3,7 +3,7 @@
 namespace Linkstreet\LaravelSms;
 
 use Linkstreet\LaravelSms\Adapters\Kap\KapAdapter;
-use Linkstreet\LaravelSms\Collection\DeviceCollection;
+use Linkstreet\LaravelSms\Collections\DeviceCollection;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Model\Device;
 use Linkstreet\LaravelSms\Model\Message;
@@ -50,7 +50,7 @@ class Sms
      * Create a new device collection
      *
      * @param array $devices
-     * @return \Linkstreet\LaravelSms\Collection\DeviceCollection
+     * @return \Linkstreet\LaravelSms\Collections\DeviceCollection
      */
     public function deviceCollection(array $devices)
     {

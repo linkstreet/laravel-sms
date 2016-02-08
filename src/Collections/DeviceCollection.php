@@ -1,6 +1,6 @@
 <?php
 
-namespace Linkstreet\LaravelSms\Collection;
+namespace Linkstreet\LaravelSms\Collections;
 
 use Linkstreet\LaravelSms\Contracts\DeviceInterface;
 

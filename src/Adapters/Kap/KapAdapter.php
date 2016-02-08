@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Linkstreet\LaravelSms\Adapters\BaseAdapter;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
-use Linkstreet\LaravelSms\Exceptions\AdapaterException;
+use Linkstreet\LaravelSms\Exceptions\AdapterException;
 
 /**
  * KapAdapter
@@ -85,18 +85,18 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
         $config = config('sms.adapter.kap');
 
         // Check for username in the config
-        if (!isset($config['username']) && empty($config['username'])) {
-            throw new AdapaterException('Invalid username');
+        if (!isset($config['username']) || empty($config['username'])) {
+            throw new AdapterException('Invalid username');
         }
 
         // Check for password in the config
-        if (!isset($config['password']) && empty($config['password'])) {
-            throw new AdapaterException('Invalid password');
+        if (!isset($config['password']) || empty($config['password'])) {
+            throw new AdapterException('Invalid password');
         }
 
         // Check for sender id in the config
-        if (!isset($config['sender']) && empty($config['sender'])) {
-            throw new AdapaterException('Invalid sender id');
+        if (!isset($config['sender']) || empty($config['sender'])) {
+            throw new AdapterException('Invalid sender id');
         }
 
         return $config;

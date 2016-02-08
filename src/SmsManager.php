@@ -2,7 +2,7 @@
 
 namespace Linkstreet\LaravelSms;
 
-use Linkstreet\LaravelSms\Collection\DeviceCollection;
+use Linkstreet\LaravelSms\Collections\DeviceCollection;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Contracts\MessageInterface;
 
@@ -17,7 +17,7 @@ class SmsManager
     private $adapter;
 
     /**
-     * @var \Linkstreet\LaravelSms\Collection\DeviceCollection
+     * @var \Linkstreet\LaravelSms\Collections\DeviceCollection
      */
     private $devices;
 
@@ -39,7 +39,7 @@ class SmsManager
     /**
      * Add the device collection
      *
-     * @param \Linkstreet\LaravelSms\Collection\DeviceCollection $devices
+     * @param \Linkstreet\LaravelSms\Collections\DeviceCollection $devices
      * @return \Linkstreet\LaravelSms\SmsManager
      */
     public function to(DeviceCollection $devices)

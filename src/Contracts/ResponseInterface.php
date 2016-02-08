@@ -31,14 +31,14 @@ interface ResponseInterface
     /**
      * Get success recipients device
      *
-     * @return \Linkstreet\LaravelSms\Collection\DeviceCollection
+     * @return \Linkstreet\LaravelSms\Collections\DeviceCollection
      */
     public function getSuccessRecipient();
 
     /**
      * Get failure recipients device
      *
-     * @return \Linkstreet\LaravelSms\Collection\DeviceCollection
+     * @return \Linkstreet\LaravelSms\Collections\DeviceCollection
      */
     public function getFailureRecipient();
 
