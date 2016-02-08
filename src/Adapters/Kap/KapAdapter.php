@@ -29,7 +29,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
     public function send($devices, $message)
     {
         $this->response = $this->client->send($this->buildRequest(), $this->buildOptions($devices, $message));
-        return new KapResponse($devices, json_decode($this->response->getBody()));
+        return new KapResponse($devices, $this->response);
     }
 
     /**

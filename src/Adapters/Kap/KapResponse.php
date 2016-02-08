@@ -86,7 +86,8 @@ class KapResponse implements ResponseInterface
      */
     private function processResponse()
     {
-        foreach ($this->response->results as $value) {
+        $body = json_decode($this->response->getBody());
+        foreach ($body->results as $value) {
             if ($value->status == 0) {
                 $this->success[$value->destination] = $this->devices->get($value->destination);
             } else {
