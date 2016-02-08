@@ -60,10 +60,11 @@ class Sms
     /**
      * KAP SYSTEM Adapter
      *
+     * @param array|null $config configuration
      * @return \Linkstreet\LaravelSms\Adapters\Kap\KapAdapter
      */
-    public function kapAdapter()
+    public function kapAdapter($config = null)
     {
-        return new KapAdapter();
+        return new KapAdapter($config);
     }
 }

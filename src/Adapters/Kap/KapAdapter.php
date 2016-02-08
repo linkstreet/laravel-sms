@@ -4,6 +4,7 @@ namespace Linkstreet\LaravelSms\Adapters\Kap;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Config;
 use Linkstreet\LaravelSms\Adapters\BaseAdapter;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Exceptions\AdapterException;
@@ -15,10 +16,12 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
 {
     /**
      * Create a instance of Kap Adapter
+     *
+     * @param array|null configuration for KAP adapter
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        //
+        $this->config = $this->requiredConfig($config);
     }
 
     /**
@@ -26,7 +29,6 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
      */
     public function send($devices, $message)
     {
-        $this->config = $this->requiredConfig();
         $this->response = (new Client)->send($this->buildRequest(), $this->buildOptions($devices, $message));
         return new KapResponse($devices, json_decode($this->response->getBody()));
     }
@@ -77,12 +79,16 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
 
     /**
      * Check & retrieve the config for KAP adapter
+     *
+     * @param array|null configuration for KAP adapter
      * @return array
      * @throws AdapaterException
      */
-    private function requiredConfig()
+    private function requiredConfig($config = null)
     {
-        $config = config('sms.adapter.kap');
+        if (is_null($config)) {
+            $config = Config::get('sms.adapter.kap');
+        }
 
         // Check for username in the config
         if (!isset($config['username']) || empty($config['username'])) {
