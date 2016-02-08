@@ -10,7 +10,6 @@ php:
 before_script:
     - composer self-update
     - composer install --no-interaction --prefer-source --dev
-    - php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServiceProvider'
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
