@@ -2,6 +2,7 @@
 
 namespace Linkstreet\LaravelSms\Adapters\Kap;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Config;
 use Linkstreet\LaravelSms\Adapters\BaseAdapter;
@@ -21,6 +22,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
     public function __construct($config = null)
     {
         $this->config = $this->requiredConfig($config);
+        $this->setClient(new Client());
     }
 
     /**

@@ -2,8 +2,6 @@
 
 namespace Linkstreet\LaravelSms\Adapters;
 
-use GuzzleHttp\Client;
-
 /**
  * BaseAdapter
  */
@@ -15,7 +13,7 @@ abstract class BaseAdapter
 
     protected $response;
 
-    public function __construct(Client $client)
+    public function setClient($client)
     {
         $this->client = $client;
     }
