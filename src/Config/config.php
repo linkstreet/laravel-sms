@@ -22,18 +22,4 @@ return [
             'sender' => ''
         ]
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | International country code with Adapters
-    |--------------------------------------------------------------------------
-    |
-    | This a list of international country codes with available SMS gateway
-    | providers with priority (Left to Right).
-    |
-    */
-
-    'code' => [
-        91 => []
-    ]
 ];

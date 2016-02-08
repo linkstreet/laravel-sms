@@ -2,6 +2,7 @@
 -------------
 
 [![Build Status][ico-travis]][link-travis]
+[![Code Coverage][ico-codecov]][link-codecov]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE)
@@ -44,22 +45,29 @@ Finally add a line to `aliases` array
 'SMS' => Linkstreet\LaravelSms\Facades\Sms::class,
 ```
 
+Run this command to publish package configuration in `config` folder
+
+```php
+php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServiceProvider'
+```
+
 ### Comming Soon
  - Docs
  - Changelog
  - Examples
- - Unit test
 
 ### License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 [ico-travis]: https://travis-ci.org/linkstreetlearning/laravel-sms.svg?branch=master
+[ico-codecov]: https://codecov.io/github/linkstreetlearning/laravel-sms/coverage.svg?branch=master
 [ico-version]: https://poser.pugx.org/linkstreetlearning/laravel-sms/v/stable
 [ico-downloads]: https://poser.pugx.org/linkstreetlearning/laravel-sms/downloads
 [ico-license]: https://poser.pugx.org/linkstreetlearning/laravel-sms/license
 
 [link-travis]: https://travis-ci.org/linkstreetlearning/laravel-sms
+[link-codecov]: https://codecov.io/github/linkstreetlearning/laravel-sms?branch=master
 [link-packagist]: https://packagist.org/packages/linkstreetlearning/laravel-sms
 [link-downloads]: https://packagist.org/packages/linkstreetlearning/laravel-sms
 [link-license]: LICENSE
