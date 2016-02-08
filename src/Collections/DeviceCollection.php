@@ -9,7 +9,7 @@ class DeviceCollection implements \IteratorAggregate
     /**
      * @var array
      */
-    private $devices;
+    private $devices = [];
 
     /**
      * Constructor

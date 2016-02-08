@@ -70,7 +70,7 @@ class KapResponse implements ResponseInterface
      */
     public function getDeviceCount()
     {
-        return count($this->devices);
+        return $this->devices->count();
     }
 
     /**
