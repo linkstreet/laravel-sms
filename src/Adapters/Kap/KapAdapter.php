@@ -83,7 +83,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
      *
      * @param array|null configuration for KAP adapter
      * @return array
-     * @throws AdapaterException
+     * @throws AdapterException
      */
     private function requiredConfig($config = null)
     {

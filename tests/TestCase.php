@@ -53,7 +53,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Test the device collcetion & device
+     * Test the device collection & device
      */
     public function testDeviceCollection()
     {

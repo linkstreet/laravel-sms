@@ -51,7 +51,7 @@ Run this command to publish package configuration in `config` folder
 php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServiceProvider'
 ```
 
-### Comming Soon
+### Coming Soon
  - Docs
  - Changelog
  - Examples
