@@ -8,11 +8,15 @@
     "authors": [
         {
             "name": "Vignesh Gurusamy",
-            "email": "vignesh@linkstreet.in",
-            "role": "Developer"
+            "email": "vignesh@linkstreet.in"
+        },
+        {
+            "name": "Meyyappan Velayutham",
+            "email": "meyyappan@linkstreet.in"
         }
     ],
     "require": {
+        "php": ">=5.5.9",
         "illuminate/support": "^5.1",
         "guzzlehttp/guzzle": "~5.3|~6.0"
     },
