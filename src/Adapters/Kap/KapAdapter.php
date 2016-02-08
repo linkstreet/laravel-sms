@@ -2,7 +2,6 @@
 
 namespace Linkstreet\LaravelSms\Adapters\Kap;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Config;
 use Linkstreet\LaravelSms\Adapters\BaseAdapter;
@@ -29,7 +28,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
      */
     public function send($devices, $message)
     {
-        $this->response = (new Client)->send($this->buildRequest(), $this->buildOptions($devices, $message));
+        $this->response = $this->client->send($this->buildRequest(), $this->buildOptions($devices, $message));
         return new KapResponse($devices, json_decode($this->response->getBody()));
     }
 
