@@ -11,8 +11,8 @@
 
 To install this package you will need:
 
- - Laravel 5
- - PHP 5.4+
+ - Laravel 5.*
+ - PHP 5.5.9+
 
 
 Run this command to install via composer
@@ -51,10 +51,17 @@ Run this command to publish package configuration in `config` folder
 php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServiceProvider'
 ```
 
+
+### Supported SMS gateway providers
+
+[KAP System](https://kapsystem.com)
+
+
 ### Coming Soon
  - Docs
  - Changelog
  - Examples
+
 
 ### License
 
