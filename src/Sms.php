@@ -27,7 +27,7 @@ class Sms
     /**
      * Create a new Message
      *
-     * @param MessageInterface $message
+     * @param string $message
      * @return \Linkstreet\LaravelSms\Model\Message
      */
     public function message($message)
