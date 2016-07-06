@@ -3,8 +3,9 @@ language: php
 sudo: false
 
 php:
-    - '5.5'
-    - '5.6'
+    - 5.5
+    - 5.6
+    - 7.0
 
 ## Cache composer bits
 cache:
@@ -12,8 +13,8 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-    - composer self-update
-    - composer install --no-interaction --prefer-source
+    - travis_retry composer self-update
+    - travis_retry composer update --no-interaction --prefer-source
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
