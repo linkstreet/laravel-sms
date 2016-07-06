@@ -8,8 +8,9 @@ php:
     - 7.0
 
 before_script:
+    - phpenv config-rm xdebug.ini
     - travis_retry composer self-update
-    - travis_retry composer update --no-interaction --prefer-source
+    - travis_retry composer update --no-interaction --profile --verbose
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
