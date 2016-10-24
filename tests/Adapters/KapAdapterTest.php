@@ -20,15 +20,6 @@ class KapAdapterTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        $this->manager = Sms::app(Sms::KapAdapter());
-    }
-
-    /**
      * @test
      * @expectedException Linkstreet\LaravelSms\Exceptions\AdapterException
      */
@@ -90,8 +81,8 @@ class KapAdapterTest extends TestCase
         $stub->setClient(new \GuzzleHttp\Client(['handler' => \GuzzleHttp\HandlerStack::create($mock)]));
 
         $response = Sms::app($stub)
-            ->to($this->devices)
-            ->send($this->message);
+            ->to(Sms::DeviceCollection([Sms::Device('+910000000001'), Sms::Device('00000')]))
+            ->send(Sms::Message('Hello world'));
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue((bool) $response->getSuccessCount());
