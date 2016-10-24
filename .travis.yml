@@ -21,8 +21,3 @@ script:
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
-
-matrix:
-  allow_failures:
-    - php: 7.0
-  fast_finish: true
