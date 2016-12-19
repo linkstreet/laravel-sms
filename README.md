@@ -74,7 +74,7 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 [ico-license]: https://poser.pugx.org/linkstreet/laravel-sms/license
 
 [link-travis]: https://travis-ci.org/linkstreet/laravel-sms
-[link-codecov]: https://codecov.io/github/linkstreetlearning/laravel-sms?branch=master
+[link-codecov]: https://codecov.io/github/linkstreet/laravel-sms?branch=master
 [link-packagist]: https://packagist.org/packages/linkstreet/laravel-sms
 [link-downloads]: https://packagist.org/packages/linkstreet/laravel-sms
 [link-license]: LICENSE
