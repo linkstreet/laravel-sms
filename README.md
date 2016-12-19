@@ -67,14 +67,14 @@ php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServic
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-[ico-travis]: https://travis-ci.org/linkstreetlearning/laravel-sms.svg?branch=master
-[ico-codecov]: https://codecov.io/github/linkstreetlearning/laravel-sms/coverage.svg?branch=master
-[ico-version]: https://poser.pugx.org/linkstreetlearning/laravel-sms/v/stable
-[ico-downloads]: https://poser.pugx.org/linkstreetlearning/laravel-sms/downloads
-[ico-license]: https://poser.pugx.org/linkstreetlearning/laravel-sms/license
+[ico-travis]: https://travis-ci.org/linkstreet/laravel-sms.svg?branch=master
+[ico-codecov]: https://codecov.io/github/linkstreet/laravel-sms/coverage.svg?branch=master
+[ico-version]: https://poser.pugx.org/linkstreet/laravel-sms/v/stable
+[ico-downloads]: https://poser.pugx.org/linkstreet/laravel-sms/downloads
+[ico-license]: https://poser.pugx.org/linkstreet/laravel-sms/license
 
-[link-travis]: https://travis-ci.org/linkstreetlearning/laravel-sms
+[link-travis]: https://travis-ci.org/linkstreet/laravel-sms
 [link-codecov]: https://codecov.io/github/linkstreetlearning/laravel-sms?branch=master
-[link-packagist]: https://packagist.org/packages/linkstreetlearning/laravel-sms
-[link-downloads]: https://packagist.org/packages/linkstreetlearning/laravel-sms
+[link-packagist]: https://packagist.org/packages/linkstreet/laravel-sms
+[link-downloads]: https://packagist.org/packages/linkstreet/laravel-sms
 [link-license]: LICENSE
