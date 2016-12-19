@@ -1,10 +1,10 @@
 {
-    "name": "linkstreetlearning/laravel-sms",
+    "name": "linkstreet/laravel-sms",
     "type": "library",
     "description": "Package to support multi SMS gateway providers",
     "license": "MIT",
     "keywords": ["laravel", "sms"],
-    "homepage": "https://github.com/linkstreetlearning/laravel-sms",
+    "homepage": "https://github.com/linkstreet/laravel-sms",
     "authors": [
         {
             "name": "Vignesh Gurusamy",

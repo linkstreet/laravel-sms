@@ -18,14 +18,14 @@ To install this package you will need:
 Run this command to install via composer
 
 ```
-composer require linkstreetlearning/laravel-sms
+composer require linkstreet/laravel-sms
 ```
 
 or edit the `composer.json` 
 
 ```
 "require": {
-    "linkstreetlearning/laravel-sms": "^1.0.0"
+    "linkstreet/laravel-sms": "^1.0.0"
 }
 ```
 
