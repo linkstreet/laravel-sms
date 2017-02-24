@@ -62,6 +62,9 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
         return [
             'debug' => false,
             'timeout' => 10,
+            'headers' => [
+                'Content-Encoding' => 'UTF-8'
+            ],
             'json' => [
                 'authentication' => [
                     'username' => $this->config['username'],
@@ -71,6 +74,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
                     [
                         'sender' => $this->config['sender'],
                         'text' => $message->getMessage(),
+                        'datacoding' => 8,
                         'recipients' => $recipients
                     ]
                 ]
