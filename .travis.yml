@@ -7,9 +7,8 @@ php:
     - 7.0
     - 7.1
 
-## Cache composer bits 
-cache: 
-  directories: 
+cache:
+  directories:
     - $HOME/.composer/cache
 
 before_script:
