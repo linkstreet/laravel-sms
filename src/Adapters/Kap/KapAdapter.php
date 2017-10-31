@@ -71,6 +71,7 @@ class KapAdapter extends BaseAdapter implements AdapterInterface
                     [
                         'sender' => $this->config['sender'],
                         'text' => $message->getMessage(),
+                        'type' => 'longSMS',
                         'recipients' => $recipients
                     ]
                 ]
