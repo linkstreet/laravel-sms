@@ -12,7 +12,7 @@
 To install this package you will need:
 
  - Laravel >= 5.3
- - PHP 5.6.4+
+ - PHP 7.0+
 
 
 Run this command to install via composer
@@ -31,7 +31,7 @@ or edit the `composer.json`
 
 Then run composer update in your terminal to pull the package.
 
-Now all you have to is add the service provider of the package and alias the packages. To do open your `app/config/app.php` file.
+Now all you have to do is to add the service provider of the package and alias the packages. To do open your `app/config/app.php` file.
 
 Add a new line to the `providers` array
 
@@ -53,8 +53,8 @@ php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServic
 
 
 ### Supported SMS gateway providers
-
-[KAP System](https://kapsystem.com)
+ - [KAP System](https://kapsystem.com)
+ - [Twilio](https://www.twilio.com/)
 
 
 ### Coming Soon
