@@ -2,94 +2,98 @@
 
 namespace Linkstreet\LaravelSms\Tests\Adapters;
 
+use Linkstreet\LaravelSms\Adapters\Kap\KapAdapter;
+use Linkstreet\LaravelSms\Exceptions\AdapterException;
+use Linkstreet\LaravelSms\Model\Device;
+use Linkstreet\LaravelSms\Tests\Adapters\HttpClient as MockClient;
 use Linkstreet\LaravelSms\Tests\TestCase;
-use Sms;
+use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 class KapAdapterTest extends TestCase
 {
+    use MockClient;
+
+    private $config;
+
     /**
      * {@inheritdoc}
      */
-    protected function getEnvironmentSetUp($app)
+    protected function setUp()
     {
-        $app['config']->set('sms.adapter.kap', [
-            'username' => rand(),
-            'password' => rand(),
-            'sender' => 'FEDCBA'
-        ]);
+        parent::setUp();
+
+        $this->config = [
+           'username' => rand(),
+           'password' => rand(),
+           'sender' => rand(),
+        ];
     }
 
-    /**
-     * @test
-     * @expectedException Linkstreet\LaravelSms\Exceptions\AdapterException
-     */
-    public function emptyUsernameConfig()
+    /** @test */
+    public function invalidCredentials()
     {
-        Sms::kapAdapter(['username' => '']);
+        $config = $this->config;
+
+        $config['username'] = null;
+
+        $adapter = (new KapAdapter($config))->setClient($this->mockClient(400));
+
+        $this->expectException(AdapterException::class);
+
+        $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
     }
 
-    /**
-     * @test
-     * @expectedException Linkstreet\LaravelSms\Exceptions\AdapterException
-     */
-    public function emptyPasswordConfig()
+    /** @test */
+    public function invalidDevice()
     {
-        Sms::kapAdapter(['username' => 'test', 'password' => '']);
+        $stub = [
+            'results' => [
+                [
+                    'status' => -13,
+                    'message_id' => '',
+                    'destination' => '0010123456789'
+                ]
+            ]
+        ];
+
+        $adapter = (new KapAdapter($this->config))->setClient($this->mockClient(200, $stub));
+
+        $response = $adapter->send(new Device('0010123456789', 'IN'), 'Test message');
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertArraySubset(reset($stub['results']), (array) $response->getResponse());
+        $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
+        $this->assertFalse($response->isSuccess());
+        $this->assertTrue($response->isFailure());
+        $this->assertEquals(-13, $response->getErrorCode());
+        $this->assertNotEmpty($response->getErrorMessage());
+        $this->assertSame('OK', $response->getReasonPhrase());
     }
 
-    /**
-     * @test
-     * @expectedException Linkstreet\LaravelSms\Exceptions\AdapterException
-     */
-    public function emptySenderConfig()
+    /** @test */
+    public function successResponse()
     {
-        Sms::kapAdapter(['username' => 'test', 'password' => 'test', 'sender' => '']);
-    }
+        $stub = [
+            'results' => [
+                [
+                    'status' => 0,
+                    'message_id' => '12312314122',
+                    'destination' => '910123456789'
+                ]
+            ]
+        ];
 
-    /**
-     * @test
-     */
-    public function sendSms()
-    {
-        $stub = Sms::kapAdapter();
+        $adapter = (new KapAdapter($this->config))->setClient($this->mockClient(200, $stub));
 
-        // Create a mock and queue two responses.
-        $mock = new \GuzzleHttp\Handler\MockHandler([
-            new \GuzzleHttp\Psr7\Response(
-                200,
-                ['Content-type' => 'application/json'],
-                json_encode(
-                    [
-                        'results' => [
-                            [
-                                'status' => 0,
-                                'message_id' => '12312314122',
-                                'destination' => '+910000000001'
-                            ],
-                            [
-                                'status' => -13,
-                                'message_id' => '',
-                                'destination' => '00000'
-                            ]
-                        ]
-                    ]
-                )
-            ),
-        ]);
+        $response = $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
 
-        // Configure the stub.
-        $stub->setClient(new \GuzzleHttp\Client(['handler' => \GuzzleHttp\HandlerStack::create($mock)]));
-
-        $response = Sms::app($stub)
-            ->to(Sms::DeviceCollection([Sms::Device('+910000000001'), Sms::Device('00000')]))
-            ->send(Sms::Message('Hello world'));
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertTrue((bool) $response->getSuccessCount());
-        $this->assertTrue((bool) $response->getFailureCount());
-        $this->assertCount(1, $response->getSuccessRecipient());
-        $this->assertCount(1, $response->getFailureRecipient());
-        $this->assertObjectHasAttribute('results', json_decode($response->getRaw()->getBody()));
-        $this->assertEquals(2, $response->getDeviceCount());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertArraySubset(reset($stub['results']), (array) $response->getResponse());
+        $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
+        $this->assertTrue($response->isSuccess());
+        $this->assertFalse($response->isFailure());
+        $this->assertEquals(0, $response->getErrorCode());
+        $this->assertNotEmpty($response->getErrorMessage());
+        $this->assertSame('OK', $response->getReasonPhrase());
     }
 }
