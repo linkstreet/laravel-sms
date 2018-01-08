@@ -2,46 +2,66 @@
 
 namespace Linkstreet\LaravelSms\Model;
 
-use Linkstreet\LaravelSms\Contracts\DeviceInterface;
-
 /**
  * Device class
  */
-class Device implements DeviceInterface
+class Device
 {
     /**
-     * Mobile number
-     * @var int
+     * Mobile number (E.164 format)
+     * @var string
      */
     private $number;
 
     /**
+     * Country iso code
+     * @var string
+     */
+    private $country_iso;
+
+    /**
      * Create an instance of Device
      *
-     * @param int $number
+     * @param string $number
+     * @param string $country_iso
      */
-    public function __construct($number)
+    public function __construct(string $number, string $country_iso)
     {
         $this->number = $number;
+        $this->country_iso = strtoupper($country_iso);
     }
 
     /**
-     * {@inheritdoc}
+     * Get device number
      */
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return \Linkstreet\LaravelSms\Model\Device
+     * Get country iso for the device number
+     * @return string
      */
-    public function setNumber($number)
+    public function getCountryIso(): string
     {
-        $this->number = $number;
+        return $this->country_iso;
+    }
 
-        return $this;
+    /**
+     * Get device number without plus sign
+     * @return string
+     */
+    public function getNumberWithoutPlusSign()
+    {
+        return ltrim($this->getNumber(), '+');
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array($this);
     }
 }

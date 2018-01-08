@@ -2,6 +2,8 @@
 
 namespace Linkstreet\LaravelSms\Contracts;
 
+use Linkstreet\LaravelSms\Model\Device;
+
 /**
  * AdapterInterface.
  */
@@ -9,10 +11,9 @@ interface AdapterInterface
 {
     /**
      * Send SMS
-     *
-     * @param \Linkstreet\LaravelSms\Collections\DeviceCollection $devices
-     * @param \Linkstreet\LaravelSms\Contracts\MessageInterface $message
-     * @param array
+     * @param \Linkstreet\LaravelSms\Model\Device $device
+     * @param string $message
+     * @return ResponseInterface
      */
-    public function send($devices, $message);
+    public function send(Device $device, string $message): ResponseInterface;
 }

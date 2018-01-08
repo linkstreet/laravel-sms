@@ -1,7 +1,8 @@
 <?php
 
-namespace Linkstreet\LaravelSms\Adapters\Kap;
+namespace Linkstreet\LaravelSms\Adapters\Twilio;
 
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Linkstreet\LaravelSms\Adapters\HttpClient;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
@@ -10,9 +11,9 @@ use Linkstreet\LaravelSms\Exceptions\AdapterException;
 use Linkstreet\LaravelSms\Model\Device;
 
 /**
- * KapAdapter
+ * TwilioAdapter
  */
-class KapAdapter implements AdapterInterface
+class TwilioAdapter implements AdapterInterface
 {
     use HttpClient;
 
@@ -22,8 +23,8 @@ class KapAdapter implements AdapterInterface
     private $config;
 
     /**
-     * Create a instance of Kap Adapter
-     * @param array configuration for KAP adapter
+     * Create a instance for Adapter
+     * @param array configuration for adapter
      */
     public function __construct(array $config)
     {
@@ -39,9 +40,13 @@ class KapAdapter implements AdapterInterface
     {
         $this->checkForMissingConfiguration();
 
-        $response = $this->client->send($this->buildRequest(), $this->buildOptions($device, $message));
+        try {
+            $response = $this->client->send($this->buildRequest(), $this->buildOptions($device, $message));
+        } catch (RequestException $exception) {
+            $response = $exception->getResponse();
+        }
 
-        return new KapResponse($device, $response);
+        return new TwilioResponse($device, $response);
     }
 
     /**
@@ -50,7 +55,10 @@ class KapAdapter implements AdapterInterface
      */
     private function buildRequest(): Request
     {
-        return new Request('POST', 'https://api.kapsystem.com/api/v3/sendsms/json');
+        return new Request(
+            'POST',
+            "https://api.twilio.com/2010-04-01/Accounts/{$this->config['sid']}/Messages.json"
+        );
     }
 
     /**
@@ -65,21 +73,14 @@ class KapAdapter implements AdapterInterface
             'debug' => false,
             'verify' => false,
             'timeout' => 20,
-            'json' => [
-                'authentication' => [
-                    'username' => $this->config['username'],
-                    'password' => $this->config['password']
-                ],
-                'messages' => [
-                    [
-                        'sender' => $this->config['sender'],
-                        'text' => $message,
-                        'type' => 'longSMS',
-                        'recipients' => [
-                            ['gsm' => $device->getNumberWithoutPlusSign()]
-                        ],
-                    ]
-                ]
+            'auth' => [
+                $this->config['sid'],
+                $this->config['token']
+            ],
+            'form_params' => [
+                'Body' => $message,
+                'From' => $this->config['from'],
+                'To' => $device->getNumber(),
             ]
         ];
     }
@@ -92,7 +93,7 @@ class KapAdapter implements AdapterInterface
     {
         $config = $this->config;
 
-        if (!isset($config['username'], $config['password'], $config['sender'])) {
+        if (!isset($config['sid'], $config['token'], $config['from'])) {
             throw AdapterException::missingConfiguration();
         }
     }
