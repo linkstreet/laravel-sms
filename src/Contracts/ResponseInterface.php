@@ -9,50 +9,49 @@ interface ResponseInterface
 {
     /**
      * Get the response status code
-     *
      * @return int
      */
-    public function getStatusCode();
+    public function getStatusCode(): int;
 
     /**
-     * Get success recipient count
-     *
-     * @return int
+     * Get processed response body
+     * @return mixed
      */
-    public function getSuccessCount();
-
-    /**
-     * Get failure recipient count
-     *
-     * @return int
-     */
-    public function getFailureCount();
-
-    /**
-     * Get success recipients device
-     *
-     * @return \Linkstreet\LaravelSms\Collections\DeviceCollection
-     */
-    public function getSuccessRecipient();
-
-    /**
-     * Get failure recipients device
-     *
-     * @return \Linkstreet\LaravelSms\Collections\DeviceCollection
-     */
-    public function getFailureRecipient();
-
-    /**
-     * Get total no of devices
-     *
-     * @return int
-     */
-    public function getDeviceCount();
+    public function getResponse();
 
     /**
      * Get raw response
-     *
-     * @return stdClass
+     * @return mixed
      */
     public function getRaw();
+
+    /**
+     * Is success response
+     * @return bool
+     */
+    public function isSuccess(): bool;
+
+    /**
+     * Is failure response
+     * @return bool
+     */
+    public function isFailure(): bool;
+
+    /**
+     * Error code if available
+     * @return string|null
+     */
+    public function getErrorCode();
+
+    /**
+     * Error message if available
+     * @return string|null
+     */
+    public function getErrorMessage();
+
+    /**
+     * Get success/failure response message
+     * @return string|null
+     */
+    public function getReasonPhrase();
 }

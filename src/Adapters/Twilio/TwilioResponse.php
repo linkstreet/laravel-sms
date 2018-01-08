@@ -1,6 +1,6 @@
 <?php
 
-namespace Linkstreet\LaravelSms\Adapters\Kap;
+namespace Linkstreet\LaravelSms\Adapters\Twilio;
 
 use Linkstreet\LaravelSms\Contracts\ResponseInterface;
 use Linkstreet\LaravelSms\Exceptions\AdapterException;
@@ -8,9 +8,9 @@ use Linkstreet\LaravelSms\Model\Device;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 /**
- * KAP Response
+ * Twilio Response
  */
-class KapResponse implements ResponseInterface
+class TwilioResponse implements ResponseInterface
 {
     /**
      * @var Device
@@ -30,10 +30,10 @@ class KapResponse implements ResponseInterface
     /**
      * KapResponse constructor.
      * @param Device $device
-     * @param PsrResponseInterface $response
+     * @param  $response
      * @throws AdapterException
      */
-    public function __construct(Device $device, PsrResponseInterface $response)
+    public function __construct(Device $device, $response)
     {
         $this->device = $device;
         $this->response = $response;
@@ -72,7 +72,7 @@ class KapResponse implements ResponseInterface
      */
     public function isSuccess(): bool
     {
-        return $this->getErrorCode() == 0;
+        return $this->response->getStatusCode() < 400;
     }
 
     /**
@@ -90,7 +90,9 @@ class KapResponse implements ResponseInterface
      */
     public function getErrorCode()
     {
-        return $this->refined->status;
+        return ($this->response->getStatusCode() < 400)
+            ? $this->refined->error_code
+            : $this->refined->code;
     }
 
     /**
@@ -99,7 +101,9 @@ class KapResponse implements ResponseInterface
      */
     public function getErrorMessage()
     {
-        return $this->statusDescription()[$this->getErrorCode()] ?? '';
+        return ($this->response->getStatusCode() < 400)
+            ? $this->refined->error_message
+            : $this->refined->message;
     }
 
     /**
@@ -125,38 +129,6 @@ class KapResponse implements ResponseInterface
             throw AdapterException::responseParseError($error, $content);
         }
 
-        if (!isset($result->results) || !is_array($result->results)) {
-            throw AdapterException::responseParseError('Invalid response structure', $content);
-        }
-
-        return reset($result->results);
-    }
-
-    /**
-     * List of response status descriptions
-     * @return array
-     */
-    private function statusDescription(): array
-    {
-        return [
-            0 => 'Request was successful',
-            -1 => 'Error in processing the request',
-            -2 => 'Not enough credits on a specific account',
-            -3 => 'Targeted network is not covered on specific account',
-            -5 => 'Username or password is invalid',
-            -6 => 'Destination address is missing in the request',
-            -10 => 'Username is missing in the request',
-            -11 => 'Password is missing in the request',
-            -13 => 'Number is not recognized by the platform',
-            -22 => 'Incorrect XML format, caused by syntax error',
-            -23 => 'General error, reasons may vary',
-            -26 => 'General API error, reasons may vary',
-            -27 => 'Invalid scheduling parameter',
-            -28 => 'Invalid PushURL in the request',
-            -30 => 'Invalid APPID in the request',
-            -33 => 'Duplicated MessageID in the request',
-            -34 => 'Sender name is not allowed',
-            -99 => 'Error in processing request, reasons may vary',
-        ];
+        return $result;
     }
 }
