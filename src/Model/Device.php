@@ -62,6 +62,6 @@ class Device
      */
     public function toArray()
     {
-        return array ($this);
+        return array($this);
     }
 }
