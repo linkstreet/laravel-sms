@@ -19,6 +19,7 @@ class Adapter
     /**
      * @param string $adapter
      * @return mixed|static
+     * @throws AdapterException
      */
     public static function find(string $adapter)
     {

@@ -79,8 +79,10 @@ class SmsManager
 
     /**
      * Send the message
-     * @throws DeviceException
+     * @param string $message
+     * @return ResponseInterface
      * @throws AdapterException
+     * @throws DeviceException
      */
     public function send(string $message): ResponseInterface
     {
