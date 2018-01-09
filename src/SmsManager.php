@@ -7,6 +7,7 @@ use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Contracts\ResponseInterface;
 use Linkstreet\LaravelSms\Exceptions\AdapterException;
 use Linkstreet\LaravelSms\Exceptions\DeviceException;
+use Linkstreet\LaravelSms\Exceptions\MessageException;
 use Linkstreet\LaravelSms\Model\Device;
 
 /**
@@ -24,6 +25,11 @@ class SmsManager
      * @var \Linkstreet\LaravelSms\Model\Device
      */
     private $device;
+
+    /**
+     * @var string
+     */
+    private $message;
 
     /**
      * @var array
@@ -49,6 +55,7 @@ class SmsManager
     }
 
     /**
+     * Set connection
      * @param string $connection
      * @return self
      * @throws AdapterException
@@ -65,8 +72,7 @@ class SmsManager
     }
 
     /**
-     * Add the device collection
-     *
+     * Add device
      * @param \Linkstreet\LaravelSms\Model\Device $device
      * @return self
      */
@@ -78,21 +84,54 @@ class SmsManager
     }
 
     /**
-     * Send the message
+     * Add message
      * @param string $message
+     * @return $this
+     */
+    public function message(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Dispatch the sms message via adapter
      * @return ResponseInterface
      * @throws AdapterException
      * @throws DeviceException
+     * @throws MessageException
      */
-    public function send(string $message): ResponseInterface
+    public function dispatch(): ResponseInterface
     {
         if (null === $this->device) {
             throw DeviceException::notFound();
         }
 
+        if (null === $this->message) {
+            throw MessageException::notFound();
+        }
+
         $this->connection = $this->connection ?? $this->resolveConnection($this->device);
 
-        return $this->getAdapter($this->connection)->send($this->device, $message);
+        return $this->getAdapter($this->connection)->send($this->device, $this->message);
+    }
+
+    /**
+     * Send a sms
+     * @param Device $device
+     * @param string $message
+     * @return ResponseInterface
+     * @throws AdapterException
+     * @throws DeviceException
+     * @throws MessageException
+     */
+    public function send(Device $device, string $message): ResponseInterface
+    {
+        $this->device = $device;
+        $this->message = $message;
+
+        return $this->dispatch();
     }
 
     /**
