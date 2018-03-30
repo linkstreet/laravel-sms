@@ -12,7 +12,7 @@
 To install this package you will need:
 
  - Laravel >= 5.3
- - PHP 7.0+
+ - PHP 7.1.3+
 
 
 Run this command to install via composer
@@ -25,7 +25,7 @@ or edit the `composer.json`
 
 ```
 "require": {
-    "linkstreet/laravel-sms": "^2.0"
+    "linkstreet/laravel-sms": "^3.0"
 }
 ```
 
