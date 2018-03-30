@@ -128,10 +128,9 @@ class SmsManager
      */
     public function send(Device $device, string $message): ResponseInterface
     {
-        $this->device = $device;
-        $this->message = $message;
-
-        return $this->dispatch();
+        return $this->to($device)
+            ->message($message)
+            ->dispatch();
     }
 
     /**
@@ -165,7 +164,9 @@ class SmsManager
             }
         }
 
-        return $connection ?: AdapterException::noPossibleConnection($device);
+        return isset($connection)
+            ? $connection
+            : AdapterException::noPossibleConnection($device);
     }
 
     /**
