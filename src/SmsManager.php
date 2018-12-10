@@ -112,9 +112,9 @@ class SmsManager
             throw MessageException::notFound();
         }
 
-        $this->connection = $this->connection ?? $this->resolveConnection($this->device);
+        $connection = $this->connection ?? $this->resolveConnection($this->device);
 
-        return $this->getAdapter($this->connection)->send($this->device, $this->message);
+        return $this->getAdapter($connection)->send($this->device, $this->message);
     }
 
     /**
