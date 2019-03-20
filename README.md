@@ -12,7 +12,7 @@
 To install this package you will need:
 
  - Laravel >= 5.6
- - PHP 7.1.3+
+ - PHP 7.2+
 
 
 Run this command to install via composer
