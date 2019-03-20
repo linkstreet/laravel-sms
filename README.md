@@ -11,7 +11,7 @@
 
 To install this package you will need:
 
- - Laravel >= 5.6
+ - Laravel >= 5.7
  - PHP 7.2+
 
 
