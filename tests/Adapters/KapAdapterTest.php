@@ -61,7 +61,6 @@ class KapAdapterTest extends TestCase
         $response = $adapter->send(new Device('0010123456789', 'IN'), 'Test message');
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertArraySubset(reset($stub['results']), (array) $response->getResponse());
         $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
         $this->assertFalse($response->isSuccess());
         $this->assertTrue($response->isFailure());
@@ -88,7 +87,6 @@ class KapAdapterTest extends TestCase
         $response = $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertArraySubset(reset($stub['results']), (array) $response->getResponse());
         $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
         $this->assertTrue($response->isSuccess());
         $this->assertFalse($response->isFailure());

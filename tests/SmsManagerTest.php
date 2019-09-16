@@ -49,11 +49,13 @@ class SmsManagerTest extends TestCase
     /** @test */
     public function setDevice()
     {
-        $manager = new SmsManager($this->config);
-
         $device = new Device('+10123456789', 'US');
 
-        $this->assertArraySubset($manager->to($device)->toArray()['device'], $device->toArray());
+        $manager = new SmsManager($this->config);
+        $m_device = $manager->to($device)->toArray()['device'][0];
+
+        $this->assertSame($m_device->getNumber(), $device->getNumber());
+        $this->assertSame($m_device->getCountryIso(), $device->getCountryIso());
     }
 
     /** @test */

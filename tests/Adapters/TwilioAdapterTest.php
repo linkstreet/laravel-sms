@@ -23,8 +23,8 @@ class TwilioAdapterTest extends TestCase
         parent::setUp();
 
         $this->config = [
-           'sid' => str_random(40),
-           'token' => str_random(40),
+           'sid' => bin2hex(random_bytes(40)),
+           'token' => bin2hex(random_bytes(40)),
            'from' => '+141040013440',
         ];
     }
@@ -58,7 +58,6 @@ class TwilioAdapterTest extends TestCase
         $response = $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
 
         $this->assertSame(400, $response->getStatusCode());
-        $this->assertArraySubset($stub, (array) $response->getResponse());
         $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
         $this->assertFalse($response->isSuccess());
         $this->assertTrue($response->isFailure());
@@ -97,7 +96,6 @@ class TwilioAdapterTest extends TestCase
         $response = $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertArraySubset($stub, (array) $response->getResponse());
         $this->assertInstanceOf(PsrResponseInterface::class, $response->getRaw());
         $this->assertTrue($response->isSuccess());
         $this->assertFalse($response->isFailure());
