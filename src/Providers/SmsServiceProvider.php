@@ -2,18 +2,12 @@
 
 namespace Linkstreet\LaravelSms\Providers;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Linkstreet\LaravelSms\SmsManager;
 
-class SmsServiceProvider extends ServiceProvider
+class SmsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Bootstrap the application services.
      *
