@@ -52,7 +52,7 @@ class Device
      * Get device number without plus sign
      * @return string
      */
-    public function getNumberWithoutPlusSign()
+    public function getNumberWithoutPlusSign(): string
     {
         return ltrim($this->getNumber(), '+');
     }
@@ -60,8 +60,8 @@ class Device
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        return array($this);
+        return get_object_vars($this);
     }
 }

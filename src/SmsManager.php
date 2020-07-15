@@ -3,6 +3,7 @@
 namespace Linkstreet\LaravelSms;
 
 use Linkstreet\LaravelSms\Adapters\Adapter;
+use Linkstreet\LaravelSms\Adapters\Log\LogAdapter;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Contracts\ResponseInterface;
 use Linkstreet\LaravelSms\Exceptions\AdapterException;
@@ -177,6 +178,10 @@ class SmsManager
      */
     public function getAdapter(string $connection): AdapterInterface
     {
+        if (false == $this->config['enabled']) {
+            return new LogAdapter();
+        }
+
         $properties = $this->config['connections'][$connection];
 
         $class = Adapter::find($properties['adapter']);
@@ -191,7 +196,7 @@ class SmsManager
     {
         return [
             'connection' => $this->connection,
-            'device' => is_null($this->device) ?: $this->device->toArray(),
+            'device' => $this->device,
         ];
     }
 }
