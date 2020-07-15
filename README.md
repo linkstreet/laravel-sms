@@ -12,8 +12,7 @@
 To install this package you will need:
 
  - Laravel 7.x
- - PHP 7.2+
-
+ - PHP 7.4+
 
 Run this command to install via composer
 
@@ -30,26 +29,6 @@ or edit the `composer.json`
 ```
 
 Then run composer update in your terminal to pull the package.
-
-Now all you have to do is to add the service provider of the package and alias the packages. To do open your `app/config/app.php` file.
-
-Add a new line to the `providers` array
-
-```php
-Linkstreet\LaravelSms\Providers\SmsServiceProvider::class
-```
-
-Finally add a line to `aliases` array
-
-```php
-'SMS' => Linkstreet\LaravelSms\Facades\Sms::class,
-```
-
-Run this command to publish package configuration in `config` folder
-
-```php
-php artisan vendor:publish --provider='Linkstreet\LaravelSms\Providers\SmsServiceProvider'
-```
 
 
 ### Supported SMS gateway providers
