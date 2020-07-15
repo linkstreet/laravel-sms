@@ -13,6 +13,7 @@ return [
     | Supported adapter: twilio, kap
     |
     */
+    'enabled' => env('SMS_ENABLED', true),
 
     'default' => 'kap',
 
