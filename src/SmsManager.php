@@ -2,6 +2,7 @@
 
 namespace Linkstreet\LaravelSms;
 
+use Illuminate\Support\Facades\Log;
 use Linkstreet\LaravelSms\Adapters\Adapter;
 use Linkstreet\LaravelSms\Contracts\AdapterInterface;
 use Linkstreet\LaravelSms\Contracts\ResponseInterface;
@@ -114,7 +115,16 @@ class SmsManager
 
         $connection = $this->connection ?? $this->resolveConnection($this->device);
 
-        return $this->getAdapter($connection)->send($this->device, $this->message);
+        $adapter = $this->getAdapter($connection);
+
+        if ($this->config['enabled']) {
+            $adapter->send($this->device, $this->message);
+        } else {
+            Log::debug('SMS Log', [
+                'device' => $this->device->toArray(),
+                'message' => $this->message,
+            ]);
+        }
     }
 
     /**
