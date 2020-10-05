@@ -11,7 +11,7 @@
 
 To install this package you will need:
 
- - Laravel 7.x
+ - Laravel 7.x & 8.x
  - PHP 7.4+
 
 Run this command to install via composer
