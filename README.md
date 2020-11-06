@@ -1,5 +1,5 @@
-# Laravel SMS
--------------
+![Laravel SMS](https://banners.beyondco.de/laravel-sms.png?theme=light&packageName=linkstreet%2Flaravel-sms&pattern=architect&style=style_1&description=SMS+sent+easy&md=1&showWatermark=1&fontSize=100px&images=annotation)
+
 
 [![Build Status][ico-travis]][link-travis]
 [![Code Coverage][ico-codecov]][link-codecov]
