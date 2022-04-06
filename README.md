@@ -23,7 +23,7 @@ or edit the `composer.json`
 
 ```
 "require": {
-    "linkstreet/laravel-sms": "^5.2"
+    "linkstreet/laravel-sms": "^6.0"
 }
 ```
 
@@ -33,12 +33,6 @@ Then run composer update in your terminal to pull the package.
 ### Supported SMS gateway providers
  - [KAP System](https://kapsystem.com)
  - [Twilio](https://www.twilio.com/)
-
-
-### Coming Soon
- - Docs
- - Changelog
- - Examples
 
 
 ### License
