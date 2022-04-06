@@ -1,8 +1,7 @@
 ![Laravel SMS](https://banners.beyondco.de/laravel-sms.png?theme=light&packageName=linkstreet%2Flaravel-sms&pattern=architect&style=style_1&description=SMS+sent+easy&md=1&showWatermark=1&fontSize=100px&images=annotation)
 
 
-[![Build Status][ico-travis]][link-travis]
-[![Code Coverage][ico-codecov]][link-codecov]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE)
@@ -46,14 +45,12 @@ Then run composer update in your terminal to pull the package.
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-[ico-travis]: https://travis-ci.org/linkstreet/laravel-sms.svg?branch=master
-[ico-codecov]: https://codecov.io/github/linkstreet/laravel-sms/coverage.svg?branch=master
+[ico-github-actions]: https://github.com/linkstreet/laravel-sms/actions/workflows/tests.yml/badge.svg
 [ico-version]: https://poser.pugx.org/linkstreet/laravel-sms/v/stable
 [ico-downloads]: https://poser.pugx.org/linkstreet/laravel-sms/downloads
 [ico-license]: https://poser.pugx.org/linkstreet/laravel-sms/license
 
-[link-travis]: https://travis-ci.org/linkstreet/laravel-sms
-[link-codecov]: https://codecov.io/github/linkstreet/laravel-sms?branch=master
+[link-github-actions]: https://github.com/linkstreet/laravel-sms/actions/workflows/tests.yml
 [link-packagist]: https://packagist.org/packages/linkstreet/laravel-sms
 [link-downloads]: https://packagist.org/packages/linkstreet/laravel-sms
 [link-license]: LICENSE
