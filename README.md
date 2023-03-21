@@ -10,20 +10,20 @@
 
 To install this package you will need:
 
- - Laravel 9.x
- - PHP 8.1+
+- Laravel 10.x
+- PHP 8.2+
 
 Run this command to install via composer
 
-```
+```php
 composer require linkstreet/laravel-sms
 ```
 
-or edit the `composer.json` 
+or edit the `composer.json`
 
-```
+```php
 "require": {
-    "linkstreet/laravel-sms": "^6.0"
+    "linkstreet/laravel-sms": "^6.1"
 }
 ```
 
@@ -31,8 +31,8 @@ Then run composer update in your terminal to pull the package.
 
 
 ### Supported SMS gateway providers
- - [KAP System](https://kapsystem.com)
- - [Twilio](https://www.twilio.com/)
+- [KAP System](https://kapsystem.com)
+- [Twilio](https://www.twilio.com/)
 
 
 ### License
