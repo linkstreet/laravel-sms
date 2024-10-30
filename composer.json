@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "illuminate/support": "^10.0",
+        "php": "^8.3",
+        "illuminate/support": "^11.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "autoload": {
@@ -26,8 +26,8 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0"
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^11.0"
     },
     "autoload-dev": {
         "psr-4": {
