@@ -125,11 +125,11 @@ class KapResponse implements ResponseInterface
             throw AdapterException::responseParseError($error, $content);
         }
 
-        if (!isset($result->results) || !is_array($result->results)) {
+        if (!isset($result->messages) || !is_array($result->messages)) {
             throw AdapterException::responseParseError('Invalid response structure', $content);
         }
 
-        return reset($result->results);
+        return reset($result->messages);
     }
 
     /**
