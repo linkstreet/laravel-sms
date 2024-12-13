@@ -23,9 +23,10 @@ class KapAdapterTest extends TestCase
         parent::setUp();
 
         $this->config = [
-           'username' => rand(),
-           'password' => rand(),
-           'sender' => rand(),
+            'username' => rand(),
+            'password' => rand(),
+            'sender' => rand(),
+            'telemarketer' => rand(),
         ];
     }
 
@@ -43,15 +44,13 @@ class KapAdapterTest extends TestCase
         $adapter->send(new Device('+910123456789', 'IN'), 'Test message');
     }
 
-    /** @test */
     public function invalidDevice()
     {
         $stub = [
-            'results' => [
+            'messages' => [
                 [
-                    'status' => -13,
-                    'message_id' => '',
-                    'destination' => '0010123456789'
+                    'messageId' => '',
+                    'to' => '0010123456789'
                 ]
             ]
         ];
@@ -69,15 +68,14 @@ class KapAdapterTest extends TestCase
         $this->assertSame('OK', $response->getReasonPhrase());
     }
 
-    /** @test */
     public function successResponse()
     {
         $stub = [
-            'results' => [
+            'messages' => [
                 [
-                    'status' => 0,
-                    'message_id' => '12312314122',
-                    'destination' => '910123456789'
+                    'messageId' => '43406163014203536863',
+                    'to' => '910123456789',
+                    'smsCount' => '1',
                 ]
             ]
         ];

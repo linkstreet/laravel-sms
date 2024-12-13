@@ -15,7 +15,7 @@ return [
     */
     'enabled' => env('SMS_ENABLED', true),
 
-    'default' => 'kap',
+    'default' => 'twilio',
 
     'connections' => [
 
@@ -32,12 +32,13 @@ return [
             'username' => env('KAP_USERNAME'),
             'password' => env('KAP_PASSWORD'),
             'sender' => env('KAP_SENDER'),
+            'telemarketer' => env('KAP_TELEMARKETER', '110200001997'),
         ],
 
     ],
 
     'priority' => [
-        'IN' => ['kap']
+        'IN' => ['kap'],
     ],
 
 ];

@@ -22,8 +22,8 @@ class KapAdapter implements AdapterInterface
     private $config;
 
     /**
-     * Create a instance of Kap Adapter
-     * @param array configuration for KAP adapter
+     * Create an instance of Kap Adapter
+     * @param array $config configuration for KAP adapter
      */
     public function __construct(array $config)
     {
@@ -50,7 +50,7 @@ class KapAdapter implements AdapterInterface
      */
     private function buildRequest(): Request
     {
-        return new Request('POST', 'https://api.kapsystem.com/api/v3/sendsms/json');
+        return new Request('GET', 'https://api.kapsystem.com/sms/1/text/query');
     }
 
     /**
@@ -65,22 +65,14 @@ class KapAdapter implements AdapterInterface
             'debug' => false,
             'verify' => false,
             'timeout' => 20,
-            'json' => [
-                'authentication' => [
-                    'username' => $this->config['username'],
-                    'password' => $this->config['password']
-                ],
-                'messages' => [
-                    [
-                        'sender' => $this->config['sender'],
-                        'text' => $message,
-                        'type' => 'longSMS',
-                        'recipients' => [
-                            ['gsm' => $device->getNumberWithoutPlusSign()]
-                        ],
-                    ]
-                ]
-            ]
+            'query' => [
+                'username' => $this->config['username'],
+                'password' => $this->config['password'],
+                'from' => $this->config['sender'],
+                'to' => $device->getNumberWithoutPlusSign(),
+                'text' => str_replace('\n', '  ', $message),
+                'indiaDltTelemarketerId' => $this->config['telemarketer'],
+            ],
         ];
     }
 
@@ -88,11 +80,11 @@ class KapAdapter implements AdapterInterface
      * Check for valid configuration
      * @throws AdapterException
      */
-    private function checkForMissingConfiguration()
+    private function checkForMissingConfiguration(): void
     {
         $config = $this->config;
 
-        if (!isset($config['username'], $config['password'], $config['sender'])) {
+        if (!isset($config['username'], $config['password'], $config['sender'], $config['telemarketer'])) {
             throw AdapterException::missingConfiguration();
         }
     }
